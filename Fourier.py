@@ -25,6 +25,7 @@ def Fourier(numpuntos,f):
     return fourier
 n=len(y) 
 fourierT=Fourier(n,y)
+gh=Fourier(n,y)
 dt=x[1]-x[0]
 freq = fftfreq(n, dt)
 plt.figure
@@ -35,6 +36,7 @@ plt.xlim(-1000,1000)
 plt.plot(freq,np.abs(fourierT),c="blue")
 plt.savefig("ParisCamila_TF.pdf")
 plt.close()
+print("Las frecuencias principales de la señal corresponden a la frecuencia de los dos picos cercanos a cero (ambos picos son iguales pero uno se encuantra en el eje positivo y el otro en el negativo)")
 
 def pasaBajosm(d,f):
     for i in range(len(d)):
@@ -48,13 +50,19 @@ def pasaBajosq(d,f):
     return f
 plt.figure()
 fourierFilt=pasaBajosm(freq,fourierT)
-fourierInv=np.fft.ifft(fourierT)
+fourierInv=np.fft.ifft(fourierFilt)
 plt.plot(x,fourierInv,c="purple")
 plt.savefig("ParisCamila_filtrada.pdf")
-
+print("")
 data_inc=np.genfromtxt("incompletos.dat", delimiter=",")
 x1=data_inc[:,0]
 y1=data_inc[:,1]
+plt.figure()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.grid()
+plt.plot(x1,y1,c="g")
+plt.show()
 f1 = interp1d(x1, y1, kind="quadratic")
 f2 = interp1d(x1, y1, kind="cubic")
 xl = np.linspace(0.00039063,0.02851562,512)
@@ -67,13 +75,13 @@ plt.xlabel("Frecuencia")
 plt.ylabel("T. de Fourier")
 plt.grid()
 plt.subplot(311)
-plt.plot(freq,np.abs(fourierT),c="purple")
+plt.plot(freq,np.abs(gh),c="purple")
 plt.subplot(312)
 plt.plot(freq2,np.abs(fourier1),c="magenta")
 plt.subplot(313)
 plt.plot(freq2,np.abs(fourier2),c="cyan")
 plt.savefig("ParisCamila_TF_interpola.pdf")
-
+#Imprima un mensaje donde describa las diferencias encontradas entre la transformada de Fourier de la sen ̃al original y las de las interpolaciones.
 filt1m=pasaBajosm(freq,fourierT)
 filt2m=pasaBajosm(freq2,fourier1)
 filt3m=pasaBajosm(freq2,fourier2)
