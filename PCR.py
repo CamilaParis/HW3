@@ -14,15 +14,27 @@ for i in range(len(data[0,:])):
             data[j,i]=1
         elif(data[j,i]=="B"):
             data[j,i]=0
-v0=data[:,0]
-v1=data[:,1]
-v2=data[:,2]
-v3=data[:,3]
 v=[]
-v.append(4)
-#for i in range(len(data[0,:])):
-
-
-print(np.mean(v0.astype(float)))
-#v0=(data[0,:]-np.mean(data[0,:]))/(np.sqrt(np.var(data[0,:])))
+for i in range(len(data[0,:])):
+	v.append(data[:,i])
+for i in range(len(data[0,:])):
+	v[i]=v[i].astype(float)
+	v[i]=(v[i]-np.mean(v[i]))/(np.sqrt(np.var(v[i])))
+#vect = np.vstack([v[0],v[1],v[2],v[3]])
+matriz_cov = np.cov(v)
+#(matriz_cov)
+val, vector=np.linalg.eig(matriz_cov)
+print(val)
+r=0.0
+r2=0.0
+vr=0.0
+vr2=0.0
+for i in range(len(val)):
+	if (val[i]>r):
+		r=val[i]
+		vr=i
+	elif (r>val[i]>r2):
+		r2=val[i]
+		vr2=i
+print(vr, vr2)
 # HW3
