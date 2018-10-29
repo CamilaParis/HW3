@@ -36,13 +36,18 @@ plt.plot(freq,np.abs(fourierT),c="blue")
 plt.savefig("ParisCamila_TF.pdf")
 plt.close()
 
-def pasaBajos(d,f):
+def pasaBajosm(d,f):
     for i in range(len(d)):
         if(abs(d[i])>1000):
             f[i]=0.0
     return f
+def pasaBajosq(d,f):
+    for i in range(len(d)):
+        if(abs(d[i])>500):
+            f[i]=0.0
+    return f
 plt.figure()
-fourierFilt=pasaBajos(freq,fourierT)
+fourierFilt=pasaBajosm(freq,fourierT)
 fourierInv=np.fft.ifft(fourierT)
 plt.plot(x,fourierInv,c="purple")
 plt.savefig("ParisCamila_filtrada.pdf")
@@ -61,9 +66,12 @@ plt.figure
 plt.xlabel("Frecuencia")
 plt.ylabel("T. de Fourier")
 plt.grid()
+plt.subplot(311)
 plt.plot(freq,np.abs(fourierT),c="purple")
-plt.scatter(freq2,np.abs(fourier1),c="magenta")
-plt.scatter(freq2,np.abs(fourier2),c="cyan")
+plt.subplot(312)
+plt.plot(freq2,np.abs(fourier1),c="magenta")
+plt.subplot(313)
+plt.plot(freq2,np.abs(fourier2),c="cyan")
 plt.savefig("ParisCamila_TF_interpola.pdf")
 
 # HW3
