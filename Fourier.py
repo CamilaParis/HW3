@@ -74,5 +74,29 @@ plt.subplot(313)
 plt.plot(freq2,np.abs(fourier2),c="cyan")
 plt.savefig("ParisCamila_TF_interpola.pdf")
 
+filt1m=pasaBajosm(freq,fourierT)
+filt2m=pasaBajosm(freq2,fourier1)
+filt3m=pasaBajosm(freq2,fourier2)
+filt1q=pasaBajosq(freq,fourierT)
+filt2q=pasaBajosq(freq2,fourier1)
+filt3q=pasaBajosq(freq2,fourier2)
+inv1m=np.fft.ifft(filt1m)
+inv2m=np.fft.ifft(filt2m)
+inv3m=np.fft.ifft(filt3m)
+inv1q=np.fft.ifft(filt1q)
+inv2q=np.fft.ifft(filt2q)
+inv3q=np.fft.ifft(filt3q)
+
+plt.subplot(211)
+plt.plot(x,inv1m,c="red")
+plt.plot(xl,inv2m,c="cyan")
+plt.plot(xl,inv3m,c="b")
+plt.subplot(212)
+plt.plot(x,inv1q,c="red")
+plt.plot(xl,inv2q,c="cyan")
+plt.plot(xl,inv3q,c="b")
+plt.savefig("ParisCamila_2Filtros.pdf")
 # HW3
+
+
 
