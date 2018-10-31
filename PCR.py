@@ -68,11 +68,14 @@ for j in range(len(data[:,0])):
         p1b.append(p1[j])
         p2b.append(p2[j])
 plt.figure()
+plt.xlabel("PC1")
+plt.ylabel("PC2")
 plt.scatter(p1r,p2r, c="r")
 plt.scatter(p1b,p2b, c="b")
 plt.savefig("ParisCamila_PCA.pdf")
 
 
-#############################################Imprima un mensaje diciendo si el metodo de PCA es util para hacer esta clasificacion, si no sirve o si puede ayudar al diagnostico para ciertos pacientes, argumentando claramente su posicion.
+#Imprima un mensaje diciendo si el metodo de PCA es util para hacer esta clasificacion, si no sirve o si puede ayudar al diagnostico para ciertos pacientes, argumentando claramente su posicion.
+print("Se puede observar la diferenciacion de los datos de tumores malignos y benignos en la grafica, aunque la dependencia es mayor para el PC1 porque los datos de los tumores son muy similares para PC2")
 # HW3
 
